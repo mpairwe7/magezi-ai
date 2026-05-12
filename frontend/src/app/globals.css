@@ -2331,3 +2331,89 @@ summary {
     font-size: 16px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Portable Navigation CSS (from OptiscanAI)
+   — Mobile overlay, safe areas, animations, accessibility
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Dynamic viewport height (handles mobile keyboard) ── */
+.h-screen-dynamic { height: 100dvh; }
+@supports not (height: 100dvh) {
+  .h-screen-dynamic { height: 100vh; }
+}
+
+/* ── Mobile overlay (sidebar backdrop) ── */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 40;
+  animation: overlay-in 0.2s ease-out;
+}
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* ── Safe area (notch support) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem); }
+  .safe-top { padding-top: env(safe-area-inset-top); }
+}
+
+/* ── Skip link (accessibility) ── */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: black;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-to-main:focus { left: 0; }
+
+/* ── Animations ── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes overlay-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slide-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-slide-in { animation: slide-in 0.25s ease-out; }
+.animate-slide-up { animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ── Touch targets (44px minimum for accessibility) ── */
+@media (pointer: coarse) {
+  button, [role="button"], a { min-height: 44px; min-width: 44px; }
+}
+
+/* ── Reduced motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── PWA standalone mode ── */
+@media (display-mode: standalone) {
+  .browser-hint { display: none; }
+}
+
+/* ── Landscape optimization ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .compact-landscape { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+}
