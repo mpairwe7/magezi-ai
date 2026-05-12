@@ -86,10 +86,9 @@ pidfile=/tmp/supervisord.pid
 user=root
 
 [program:backend]
-command=/opt/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8081 --workers 1
+command=sh -c "exec /opt/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8081 --workers 1"
 directory=/app/backend
-user=magezi
-environment=PORT="8081",LOG_LEVEL="info"
+environment=HOME="/app",PORT="8081",KNOWLEDGE_BASE_DIR="/app/knowledge-base",BM25_STATE_PATH="/app/knowledge-base/bm25_state.json"
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 stderr_logfile=/dev/stderr
@@ -103,7 +102,6 @@ stopsignal=TERM
 [program:frontend]
 command=node server.js
 directory=/app/frontend/.next/standalone
-user=magezi
 environment=PORT="3000",HOSTNAME="127.0.0.1"
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
