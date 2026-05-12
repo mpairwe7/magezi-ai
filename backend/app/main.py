@@ -707,3 +707,34 @@ async def translate_text(body: TranslateRequest):
     if result:
         return {"text": result, "source_lang": body.source_language, "target_lang": body.target_language, "backend": "sunbird_cloud"}
     return {"text": "", "error": "Translation failed"}
+
+
+# ── Voice Streaming WebSocket ──────────────────────────────────────────────
+
+@app.websocket("/v1/voice/chat/stream")
+async def voice_chat_stream(websocket):
+    """Streaming voice chat: audio → ASR → LLM → TTS over WebSocket."""
+    from app.voice_ws import voice_stream_ws
+
+    # Adapter: wrap the app's generate function for the voice pipeline
+    def _generate_for_voice(query: str) -> dict:
+        try:
+            if hasattr(service, "generate"):
+                from app.models import ChatRequest
+                req = ChatRequest(query=query)
+                resp = service.generate(req)
+                return {"answer": resp.answer, "confidence": getattr(resp, "confidence", 0), "sources": getattr(resp, "sources", [])}
+            else:
+                return {"answer": "Voice service available but chat not configured.", "confidence": 0}
+        except Exception as e:
+            return {"answer": f"I encountered an error: {e}", "confidence": 0}
+
+    # Get sunbird module
+    try:
+        from app import sunbird as _sunbird
+    except ImportError:
+        _sunbird = None
+
+    await voice_stream_ws(websocket, _sunbird, _generate_for_voice)
+
+

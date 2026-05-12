@@ -17,18 +17,20 @@ RUN pip install --upgrade pip && pip install -r requirements.txt && \
     find /opt/venv -name "*.dist-info" -type d -exec rm -rf {} + 2>/dev/null; true
 
 # --- Frontend ---
-FROM node:20-slim AS frontend-builder
+FROM node:22-alpine AS frontend-builder
+RUN npm install -g bun 2>/dev/null || true
 WORKDIR /app/frontend
-COPY frontend/package.json frontend/package-lock.json* ./
-RUN npm install --omit=dev 2>/dev/null || npm install
+COPY frontend/package.json frontend/bun.lock* frontend/package-lock.json* ./
+RUN (bun install --frozen-lockfile 2>/dev/null || bun install 2>/dev/null || npm install --omit=dev 2>/dev/null || npm install)
 COPY frontend/ ./
-RUN NEXT_PUBLIC_API_URL="" npm run build \
-    && mkdir -p /srv/nextjs/_next/static \
+RUN mkdir -p /srv/nextjs/_next/static \
+    && NEXT_PUBLIC_API_URL="" npm run build \
     && cp -r .next/static/* /srv/nextjs/_next/static/ \
-    && cp -r public/* /srv/nextjs/ 2>/dev/null || true \
+    && (cp -r public/* /srv/nextjs/ 2>/dev/null || true) \
     && mkdir -p .next/standalone/.next \
     && cp -r .next/static .next/standalone/.next/static \
-    && cp -r public .next/standalone/public 2>/dev/null || true
+    && (cp -r public .next/standalone/public 2>/dev/null || true)
+
 
 # --- Runtime ---
 FROM python:3.11-slim-bookworm
@@ -70,6 +72,7 @@ server {
     location /health { proxy_pass http://127.0.0.1:8081/health; proxy_http_version 1.1; }
     location /docs { proxy_pass http://127.0.0.1:8081/docs; proxy_http_version 1.1; }
     location /v1/ { proxy_pass http://127.0.0.1:8081/v1/; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header Connection ''; proxy_buffering off; proxy_read_timeout 300s; }
+    location /v1/voice/ { proxy_pass http://127.0.0.1:8081/v1/voice/; proxy_http_version 1.1; proxy_set_header Host $host; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; proxy_read_timeout 300s; }
     location / { proxy_pass http://127.0.0.1:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; }
     location @nextjs { proxy_pass http://127.0.0.1:3000; proxy_http_version 1.1; proxy_set_header Host $host; }
 }
