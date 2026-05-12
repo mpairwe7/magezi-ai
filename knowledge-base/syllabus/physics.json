@@ -1,0 +1,231 @@
+{
+  "subject": "physics",
+  "curriculum": "NCDC 2025 Competence-Based A-Level",
+  "level": "S.5-S.6",
+  "topics": [
+    {
+      "name": "Mechanics",
+      "code": "PHY-01",
+      "topics": [
+        {
+          "name": "Newton's Laws of Motion",
+          "subtopics": [
+            {
+              "name": "Newton's First Law (Law of Inertia)",
+              "content": "A body remains at rest or in uniform motion in a straight line unless acted upon by an external force. Inertia is the tendency of a body to resist changes in its state of motion. Mass is a measure of inertia.",
+              "competences": ["Explain Newton's First Law with real-world examples", "Distinguish between mass and weight", "Describe inertia in everyday situations"]
+            },
+            {
+              "name": "Newton's Second Law (F = ma)",
+              "content": "The rate of change of momentum of a body is directly proportional to the applied force and takes place in the direction of the force. F = ma, where F is the net force in Newtons, m is mass in kg, and a is acceleration in m/s². When mass is constant: F = ma. When mass varies (e.g., rockets): F = dp/dt. Impulse = F×t = change in momentum.",
+              "competences": ["State and derive F = ma from momentum principles", "Solve problems involving force, mass, and acceleration", "Draw free body diagrams", "Calculate impulse and momentum change"]
+            },
+            {
+              "name": "Newton's Third Law (Action-Reaction)",
+              "content": "For every action, there is an equal and opposite reaction. The action and reaction forces act on different bodies. They are equal in magnitude, opposite in direction, and of the same type. Examples: book on table (weight and normal reaction), walking (foot pushes ground, ground pushes foot), rocket propulsion (exhaust gases pushed down, rocket pushed up).",
+              "competences": ["Identify action-reaction pairs", "Explain why action-reaction pairs do not cancel out", "Apply to walking, swimming, rocket propulsion"]
+            }
+          ]
+        },
+        {
+          "name": "Kinematics",
+          "subtopics": [
+            {
+              "name": "Equations of Motion (SUVAT)",
+              "content": "For uniformly accelerated motion: v = u + at, s = ut + ½at², v² = u² + 2as, s = ½(u+v)t. Where u = initial velocity, v = final velocity, a = acceleration, s = displacement, t = time. These apply only when acceleration is constant. For free fall: a = g = 9.81 m/s² downward.",
+              "competences": ["Apply SUVAT equations to solve motion problems", "Interpret velocity-time and displacement-time graphs", "Calculate displacement from area under v-t graph"]
+            },
+            {
+              "name": "Projectile Motion",
+              "content": "Projectile motion is motion under gravity alone. Horizontal component of velocity is constant (no air resistance). Vertical component is affected by gravity (g = 9.81 m/s²). Time of flight: T = 2u sin(θ)/g. Range: R = u² sin(2θ)/g. Maximum height: H = u² sin²(θ)/(2g). Maximum range occurs at θ = 45°.",
+              "competences": ["Resolve velocity into horizontal and vertical components", "Calculate time of flight, range, maximum height", "Sketch trajectories for different angles"]
+            }
+          ]
+        },
+        {
+          "name": "Circular Motion",
+          "subtopics": [
+            {
+              "name": "Uniform Circular Motion",
+              "content": "An object moving in a circle at constant speed has centripetal acceleration directed toward the centre: a = v²/r = ω²r. Centripetal force: F = mv²/r = mω²r. Angular velocity: ω = 2πf = 2π/T. Period T = 2π/ω. Examples: car on a banked curve, conical pendulum, satellite in orbit. For a banked road with no friction: tan(θ) = v²/(rg).",
+              "competences": ["Define centripetal acceleration and force", "Solve circular motion problems with banking", "Explain why centripetal force is not a separate force"]
+            }
+          ]
+        },
+        {
+          "name": "Work, Energy, and Power",
+          "subtopics": [
+            {
+              "name": "Work-Energy Theorem and Conservation",
+              "content": "Work done: W = Fs cos(θ). Kinetic energy: KE = ½mv². Gravitational potential energy: PE = mgh. Elastic potential energy: PE = ½kx². Conservation of energy: total energy in an isolated system remains constant. Work-energy theorem: net work = change in KE. Power: P = W/t = Fv. Efficiency = (useful output / total input) × 100%.",
+              "competences": ["Calculate work done by constant and variable forces", "Apply conservation of energy to solve problems", "Calculate power and efficiency"]
+            }
+          ]
+        },
+        {
+          "name": "Momentum and Collisions",
+          "subtopics": [
+            {
+              "name": "Conservation of Momentum",
+              "content": "Linear momentum: p = mv. Conservation of momentum: total momentum before collision = total momentum after (in isolated system). Elastic collision: both momentum and KE conserved. Inelastic collision: momentum conserved, KE not conserved. Perfectly inelastic: objects stick together. Coefficient of restitution: e = relative speed of separation / relative speed of approach. e = 1 (elastic), 0 < e < 1 (inelastic), e = 0 (perfectly inelastic).",
+              "competences": ["Apply conservation of momentum to collisions", "Distinguish elastic from inelastic collisions", "Calculate coefficient of restitution"]
+            }
+          ]
+        },
+        {
+          "name": "Gravitation",
+          "subtopics": [
+            {
+              "name": "Newton's Law of Gravitation",
+              "content": "F = GMm/r², where G = 6.674 × 10⁻¹¹ N m² kg⁻². Gravitational field strength: g = GM/r². Gravitational potential: V = -GM/r. Orbital velocity: v = √(GM/r). Escape velocity: v = √(2GM/r). Kepler's Third Law: T² ∝ r³, or T² = (4π²/GM)r³. Geostationary orbit: T = 24 hours, r ≈ 42,000 km from Earth's centre.",
+              "competences": ["Apply Newton's law of gravitation", "Calculate orbital velocity and escape velocity", "Apply Kepler's Third Law"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Waves and Oscillations",
+      "code": "PHY-02",
+      "topics": [
+        {
+          "name": "Simple Harmonic Motion",
+          "subtopics": [
+            {
+              "name": "SHM Equations and Energy",
+              "content": "SHM: acceleration proportional to displacement and directed toward equilibrium. a = -ω²x. Displacement: x = A sin(ωt + φ). Velocity: v = Aω cos(ωt + φ). Maximum velocity: v_max = Aω. Maximum acceleration: a_max = Aω². Period of mass-spring: T = 2π√(m/k). Period of simple pendulum: T = 2π√(l/g). Energy: E_total = ½kA² = ½mω²A². KE = ½mω²(A² - x²). PE = ½mω²x².",
+              "competences": ["Derive and apply SHM equations", "Calculate period of springs and pendulums", "Analyse energy in SHM"]
+            }
+          ]
+        },
+        {
+          "name": "Properties of Waves",
+          "subtopics": [
+            {
+              "name": "Wave Parameters and Types",
+              "content": "Wavelength (λ): distance between successive crests. Frequency (f): oscillations per second (Hz). Period (T = 1/f). Amplitude (A): maximum displacement. Wave speed: v = fλ. Transverse waves: displacement perpendicular to propagation (light, water). Longitudinal waves: displacement parallel to propagation (sound). Intensity ∝ A². Inverse square law: I ∝ 1/r².",
+              "competences": ["Define wave parameters", "Apply v = fλ", "Distinguish transverse from longitudinal waves"]
+            },
+            {
+              "name": "Interference and Diffraction",
+              "content": "Superposition: when waves overlap, resultant displacement = sum of individual displacements. Constructive interference: path difference = nλ. Destructive interference: path difference = (n + ½)λ. Young's double slit: fringe spacing Δy = λD/d. Single slit diffraction: minima at sin(θ) = nλ/a. Diffraction grating: d sin(θ) = nλ, where d = slit spacing.",
+              "competences": ["Explain superposition principle", "Solve Young's double slit problems", "Apply diffraction grating equation"]
+            },
+            {
+              "name": "Stationary Waves",
+              "content": "Stationary waves form when two waves of same frequency travel in opposite directions. Nodes: points of zero displacement. Antinodes: points of maximum displacement. String fixed at both ends: L = nλ/2, f_n = nv/(2L). Open pipe: L = nλ/2. Closed pipe: L = (2n-1)λ/4 (odd harmonics only).",
+              "competences": ["Explain formation of stationary waves", "Calculate resonant frequencies of strings and pipes", "Distinguish nodes from antinodes"]
+            }
+          ]
+        },
+        {
+          "name": "Sound Waves",
+          "subtopics": [
+            {
+              "name": "Speed of Sound and Doppler Effect",
+              "content": "Sound is a longitudinal wave. Speed of sound in air ≈ 340 m/s at 20°C. Speed increases with temperature: v = 331 + 0.6T (°C). Doppler effect: observed frequency changes when source or observer moves. f' = f(v ± v_o)/(v ∓ v_s). Approaching: frequency increases. Receding: frequency decreases. Beat frequency = |f₁ - f₂|.",
+              "competences": ["Calculate speed of sound at different temperatures", "Apply Doppler effect formula", "Calculate beat frequency"]
+            }
+          ]
+        },
+        {
+          "name": "Optics",
+          "subtopics": [
+            {
+              "name": "Reflection and Refraction",
+              "content": "Law of reflection: angle of incidence = angle of reflection. Snell's law: n₁ sin(θ₁) = n₂ sin(θ₂). Refractive index: n = c/v. Total internal reflection: sin(c) = n₂/n₁ (where c = critical angle). Applications: optical fibres, mirages, prisms. Thin lens formula: 1/f = 1/v - 1/u. Magnification: m = v/u. Power of lens: P = 1/f (in dioptres).",
+              "competences": ["Apply Snell's law", "Calculate critical angle for total internal reflection", "Solve thin lens problems"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Electricity and Magnetism",
+      "code": "PHY-03",
+      "topics": [
+        {
+          "name": "Electric Fields",
+          "subtopics": [
+            {
+              "name": "Coulomb's Law and Electric Field Strength",
+              "content": "Coulomb's law: F = kQ₁Q₂/r², where k = 1/(4πε₀) = 8.99 × 10⁹ N m² C⁻². Electric field strength: E = F/q = kQ/r². Electric potential: V = kQ/r. Potential difference: V = W/q. Uniform field between parallel plates: E = V/d. Field lines point from positive to negative. Equipotential surfaces are perpendicular to field lines.",
+              "competences": ["Apply Coulomb's law", "Calculate electric field strength and potential", "Draw electric field patterns"]
+            }
+          ]
+        },
+        {
+          "name": "Direct Current Circuits",
+          "subtopics": [
+            {
+              "name": "Ohm's Law and Resistance",
+              "content": "Ohm's Law: V = IR. Resistance: R = ρl/A (ρ = resistivity, l = length, A = cross-sectional area). Series: R_total = R₁ + R₂ + R₃. Parallel: 1/R_total = 1/R₁ + 1/R₂ + 1/R₃. Power: P = IV = I²R = V²/R. Kirchhoff's first law: ΣI = 0 at a junction. Kirchhoff's second law: ΣV = 0 around a loop. EMF = terminal PD + lost volts: ε = V + Ir.",
+              "competences": ["Apply Ohm's Law and Kirchhoff's laws", "Solve series and parallel circuits", "Calculate power dissipation"]
+            },
+            {
+              "name": "Capacitors",
+              "content": "Capacitance: C = Q/V. Parallel plate: C = ε₀εᵣA/d. Energy stored: E = ½CV² = ½QV = ½Q²/C. Capacitors in parallel: C_total = C₁ + C₂. In series: 1/C_total = 1/C₁ + 1/C₂. Charging: Q = Q₀(1 - e^(-t/RC)). Discharging: Q = Q₀e^(-t/RC). Time constant: τ = RC.",
+              "competences": ["Calculate capacitance of parallel plates", "Solve series and parallel capacitor networks", "Analyse charging and discharging curves"]
+            }
+          ]
+        },
+        {
+          "name": "Electromagnetic Induction",
+          "subtopics": [
+            {
+              "name": "Faraday's and Lenz's Laws",
+              "content": "Magnetic flux: Φ = BA cos(θ). Faraday's law: EMF = -dΦ/dt = -N(dΦ/dt) for N turns. Lenz's law: induced current opposes the change that causes it. EMF in a rotating coil: ε = NBAω sin(ωt). Peak EMF: ε₀ = NBAω. Transformers: V₁/V₂ = N₁/N₂ = I₂/I₁ (ideal). Eddy currents: induced currents in bulk conductors, cause heating.",
+              "competences": ["Apply Faraday's and Lenz's laws", "Calculate induced EMF in rotating coils", "Solve transformer problems"]
+            }
+          ]
+        },
+        {
+          "name": "Alternating Current",
+          "subtopics": [
+            {
+              "name": "AC Circuits and RMS Values",
+              "content": "AC voltage: V = V₀ sin(ωt). RMS values: V_rms = V₀/√2, I_rms = I₀/√2. Average power: P = V_rms × I_rms × cos(φ). Reactance: capacitive X_C = 1/(ωC), inductive X_L = ωL. Impedance: Z = √(R² + (X_L - X_C)²). Resonance when X_L = X_C: f₀ = 1/(2π√(LC)). Power factor: cos(φ) = R/Z.",
+              "competences": ["Calculate RMS values", "Solve AC circuit problems with impedance", "Find resonant frequency"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Modern Physics",
+      "code": "PHY-04",
+      "topics": [
+        {
+          "name": "Quantum Physics",
+          "subtopics": [
+            {
+              "name": "Photoelectric Effect",
+              "content": "Einstein's equation: E = hf = φ + ½mv²_max. Work function φ = hf₀ (threshold frequency). Planck's constant: h = 6.63 × 10⁻³⁴ J s. Stopping potential: eV_s = ½mv²_max = hf - φ. Photon energy: E = hf = hc/λ. Wave-particle duality: particles exhibit wave properties (de Broglie wavelength: λ = h/mv). Energy levels: E = -13.6/n² eV for hydrogen.",
+              "competences": ["Apply Einstein's photoelectric equation", "Calculate stopping potential and threshold frequency", "Explain wave-particle duality"]
+            }
+          ]
+        },
+        {
+          "name": "Nuclear Physics",
+          "subtopics": [
+            {
+              "name": "Radioactivity and Nuclear Reactions",
+              "content": "Alpha (α): ⁴₂He nucleus, stopped by paper, highly ionising. Beta (β⁻): electron, stopped by aluminium. Gamma (γ): EM radiation, stopped by thick lead. Half-life: t½ = ln2/λ. N = N₀e^(-λt). Activity: A = λN = A₀e^(-λt). Mass-energy equivalence: E = mc². Binding energy per nucleon peaks at iron-56. Nuclear fission: heavy nucleus splits. Nuclear fusion: light nuclei combine. Both release energy.",
+              "competences": ["Describe three types of radioactive decay", "Calculate activity and half-life", "Explain fission and fusion"]
+            }
+          ]
+        },
+        {
+          "name": "Thermal Physics",
+          "subtopics": [
+            {
+              "name": "Gas Laws and Thermodynamics",
+              "content": "Ideal gas law: pV = nRT = NkT. Boyle's law: pV = constant (constant T). Charles's law: V/T = constant (constant p). Pressure law: p/T = constant (constant V). Kinetic theory: pV = ⅓Nm<c²>. Average KE = 3kT/2. First law of thermodynamics: ΔU = Q - W. Specific heat capacity: Q = mcΔT. Latent heat: Q = mL.",
+              "competences": ["Apply ideal gas law and gas laws", "Derive pressure from kinetic theory", "Apply first law of thermodynamics"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

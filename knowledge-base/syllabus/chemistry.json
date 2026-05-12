@@ -1,0 +1,155 @@
+{
+  "subject": "chemistry",
+  "curriculum": "NCDC 2025 Competence-Based A-Level",
+  "level": "S.5-S.6",
+  "topics": [
+    {
+      "name": "Atomic Structure and Bonding",
+      "code": "CHM-01",
+      "topics": [
+        {
+          "name": "Atomic Structure",
+          "subtopics": [
+            {
+              "name": "Electronic Configuration and Orbitals",
+              "content": "Electrons occupy orbitals in order of increasing energy: 1s 2s 2p 3s 3p 4s 3d 4p... Aufbau principle: fill lowest energy orbitals first. Pauli exclusion: max 2 electrons per orbital with opposite spins. Hund's rule: electrons fill degenerate orbitals singly before pairing. Quantum numbers: n (principal), l (angular momentum, 0 to n-1), ml (-l to +l), ms (+½ or -½). s holds 2, p holds 6, d holds 10 electrons.",
+              "competences": ["Write electronic configurations for elements 1-36", "Apply Aufbau, Pauli, and Hund's rules", "Relate electronic configuration to position in periodic table"]
+            }
+          ]
+        },
+        {
+          "name": "Chemical Bonding",
+          "subtopics": [
+            {
+              "name": "Types of Chemical Bonds",
+              "content": "Ionic bonding: transfer of electrons between metals and non-metals, forming ions held by electrostatic attraction. Properties: high melting point, conduct when molten/dissolved, brittle. Covalent bonding: sharing of electron pairs between non-metals. Dative (coordinate) bond: both electrons from one atom. Metallic bonding: delocalised electrons in a sea around positive metal ions. Properties: malleable, conduct electricity, lustrous. Intermolecular forces: van der Waals (London dispersion), dipole-dipole, hydrogen bonding (F, O, N with H).",
+              "competences": ["Draw dot-and-cross diagrams for ionic and covalent compounds", "Explain properties in terms of bonding", "Identify and compare intermolecular forces"]
+            },
+            {
+              "name": "Shapes of Molecules (VSEPR)",
+              "content": "VSEPR theory: electron pairs around central atom repel and adopt positions that minimise repulsion. Lone pair-lone pair > lone pair-bond pair > bond pair-bond pair repulsion. Linear (2 bonding pairs, 180°): CO₂, BeCl₂. Trigonal planar (3 bp, 120°): BF₃. Tetrahedral (4 bp, 109.5°): CH₄. Bent (2 bp + 2 lp, ~104.5°): H₂O. Trigonal pyramidal (3 bp + 1 lp, ~107°): NH₃. Octahedral (6 bp, 90°): SF₆.",
+              "competences": ["Predict shapes of molecules using VSEPR", "Draw 3D representations", "Explain bond angle variations due to lone pairs"]
+            }
+          ]
+        },
+        {
+          "name": "Periodicity",
+          "subtopics": [
+            {
+              "name": "Periodic Trends",
+              "content": "Atomic radius decreases across a period (increasing nuclear charge) and increases down a group (more shells). First ionisation energy generally increases across a period and decreases down a group. Electronegativity increases across period and decreases down group (Pauling scale: F = 4.0, most electronegative). Metallic character increases down a group and decreases across a period. Group trends: Group 2 (alkaline earth metals) reactivity increases down; Group 7 (halogens) reactivity decreases down.",
+              "competences": ["Explain trends in atomic radius, ionisation energy, electronegativity", "Compare Group 2 and Group 7 properties", "Relate trends to electronic structure"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Organic Chemistry",
+      "code": "CHM-02",
+      "topics": [
+        {
+          "name": "Nomenclature and Isomerism",
+          "subtopics": [
+            {
+              "name": "IUPAC Naming and Types of Isomerism",
+              "content": "IUPAC naming: identify longest carbon chain, number from end nearest substituent, name substituents alphabetically. Functional group suffixes: -ane (alkane), -ene (alkene), -ol (alcohol), -al (aldehyde), -one (ketone), -oic acid (carboxylic acid), -oate (ester). Structural isomerism: same molecular formula, different structural formula (chain, position, functional group). Stereoisomerism: E/Z (geometric) isomerism around C=C with different groups; optical isomerism with chiral carbon (4 different groups).",
+              "competences": ["Name organic compounds using IUPAC rules", "Identify all types of isomerism", "Draw structural and displayed formulae"]
+            }
+          ]
+        },
+        {
+          "name": "Reaction Mechanisms",
+          "subtopics": [
+            {
+              "name": "Nucleophilic Substitution (SN1 and SN2)",
+              "content": "SN2: one-step concerted mechanism. Nucleophile attacks from backside (180°) as leaving group departs. Rate = k[substrate][nucleophile]. Favoured by: primary substrates, strong nucleophiles, polar aprotic solvents. Produces inversion of configuration (Walden inversion). SN1: two-step mechanism. Step 1: leaving group departs → carbocation (rate-determining). Step 2: nucleophile attacks. Rate = k[substrate]. Favoured by: tertiary substrates, weak nucleophiles, polar protic solvents. Produces racemic mixture.",
+              "competences": ["Draw SN1 and SN2 mechanisms with curly arrows", "Predict which mechanism is favoured", "Predict stereochemical outcomes"]
+            },
+            {
+              "name": "Elimination Reactions (E1 and E2)",
+              "content": "E2: one-step concerted. Strong base abstracts β-hydrogen, leaving group departs. Requires anti-periplanar geometry. Favoured by strong bases, primary/secondary substrates. E1: two-step via carbocation intermediate. Favoured by weak bases, tertiary substrates. Zaitsev's Rule: more substituted alkene is major product. Competition: SN2 vs E2 (strong base + primary = SN2; strong base + tertiary = E2). SN1 vs E1 (occur simultaneously with tertiary substrates).",
+              "competences": ["Draw E1 and E2 mechanisms", "Apply Zaitsev's Rule", "Predict whether substitution or elimination dominates"]
+            },
+            {
+              "name": "Electrophilic Addition to Alkenes",
+              "content": "Alkenes undergo electrophilic addition due to electron-rich C=C bond. With HBr: Markovnikov's rule (H adds to C with more H's). Mechanism: π electrons attack electrophile → carbocation → nucleophile attacks. With Br₂: forms cyclic bromonium ion intermediate. With H₂O (acid catalyst): hydration forms alcohol. With H₂ (Ni catalyst): hydrogenation forms alkane. Permanganate test: alkenes decolourise purple KMnO₄.",
+              "competences": ["Draw electrophilic addition mechanisms", "Apply Markovnikov's rule", "Predict products of addition reactions"]
+            }
+          ]
+        },
+        {
+          "name": "Functional Groups",
+          "subtopics": [
+            {
+              "name": "Alcohols, Aldehydes, Ketones, and Carboxylic Acids",
+              "content": "Alcohols (R-OH): primary → aldehyde → carboxylic acid (K₂Cr₂O₇/H₂SO₄); secondary → ketone; tertiary → no oxidation. Dehydration: conc. H₂SO₄ at 170°C → alkene. Esterification: alcohol + carboxylic acid → ester + water (acid catalyst). Aldehydes (R-CHO): reduce Tollens' (silver mirror) and Fehling's (red ppt). Ketones (R-CO-R'): don't reduce Tollens'/Fehling's. Carboxylic acids: weak acids, react with bases/carbonates/metals. pKa values indicate acid strength.",
+              "competences": ["Write reactions for oxidation of alcohols", "Distinguish aldehydes from ketones using chemical tests", "Write esterification equations"]
+            },
+            {
+              "name": "Amines, Amides, and Amino Acids",
+              "content": "Amines: primary (RNH₂), secondary (R₂NH), tertiary (R₃N). Basic properties: lone pair on N acts as proton acceptor. Basicity: aliphatic amines > ammonia > aromatic amines. Reactions: with acids → salts, with acyl chlorides → amides. Amides (RCONH₂): formed from carboxylic acids + amines; hydrolysed by acids/alkalis. Amino acids: contain both -NH₂ and -COOH; zwitterionic at isoelectric point; form peptide bonds (condensation polymerisation) → proteins.",
+              "competences": ["Classify amines and compare basicity", "Write reactions forming amides and peptide bonds", "Explain zwitterion behaviour"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Physical Chemistry",
+      "code": "CHM-03",
+      "topics": [
+        {
+          "name": "Energetics",
+          "subtopics": [
+            {
+              "name": "Enthalpy Changes and Hess's Law",
+              "content": "Standard enthalpy of formation ΔH°f: enthalpy change when 1 mole of compound forms from elements in standard states. Standard enthalpy of combustion ΔH°c: when 1 mole burns completely in O₂. Hess's Law: total enthalpy change is independent of route. ΔH°rxn = ΣΔH°f(products) - ΣΔH°f(reactants). Bond enthalpy: energy to break 1 mole of bonds in gas phase. ΔH ≈ Σ(bonds broken) - Σ(bonds formed). Born-Haber cycle: lattice enthalpy via Hess's Law for ionic compounds.",
+              "competences": ["Calculate enthalpy changes using Hess's Law", "Construct Born-Haber cycles", "Use bond enthalpies to estimate ΔH"]
+            }
+          ]
+        },
+        {
+          "name": "Chemical Kinetics",
+          "subtopics": [
+            {
+              "name": "Rate Laws, Order, and Activation Energy",
+              "content": "Rate = k[A]^m[B]^n. Overall order = m + n. Determined experimentally (initial rates method or half-life method). Zero order: rate constant, [A] decreases linearly. First order: t½ = ln2/k (constant half-life). Second order: t½ = 1/(k[A]₀). Arrhenius equation: k = Ae^(-Ea/RT). ln(k) = ln(A) - Ea/(RT). Plot ln(k) vs 1/T gives straight line, gradient = -Ea/R. Catalysts lower Ea by providing alternative pathway.",
+              "competences": ["Determine order from experimental data", "Calculate rate constants and half-lives", "Use Arrhenius equation to find activation energy"]
+            }
+          ]
+        },
+        {
+          "name": "Chemical Equilibrium",
+          "subtopics": [
+            {
+              "name": "Le Chatelier's Principle and Equilibrium Constants",
+              "content": "Le Chatelier: system at equilibrium opposes change. Increasing [reactant] shifts right. Increasing T for exothermic shifts left (increases Kc); for endothermic shifts right (increases Kc). Pressure increase shifts toward fewer gas moles. Catalyst: no effect on position, only rate. Kc = [products]^n/[reactants]^m. Kp = (p_products)^n/(p_reactants)^m. Kp = Kc(RT)^Δn. Large K: products favoured. Small K: reactants favoured.",
+              "competences": ["Apply Le Chatelier's Principle", "Calculate Kc and Kp", "Use ICE tables for equilibrium problems"]
+            }
+          ]
+        },
+        {
+          "name": "Electrochemistry",
+          "subtopics": [
+            {
+              "name": "Electrode Potentials and Electrolysis",
+              "content": "Standard electrode potential E°: measured against standard hydrogen electrode (SHE, 0.00 V). More positive E° = stronger oxidising agent. Cell EMF: E°cell = E°cathode - E°anode. Electrochemical series predicts feasibility. Nernst equation: E = E° - (RT/nF)ln(Q). Electrolysis: passage of electric current through ionic compound. Faraday's laws: m = MIt/(nF), where F = 96485 C/mol. Preferential discharge: ions with lower electrode potential discharged first at cathode.",
+              "competences": ["Use electrode potentials to predict cell EMF", "Apply Faraday's laws to electrolysis calculations", "Predict products of electrolysis"]
+            }
+          ]
+        },
+        {
+          "name": "Acids, Bases, and Buffers",
+          "subtopics": [
+            {
+              "name": "pH, Buffers, and Titration Curves",
+              "content": "Brønsted-Lowry: acid = proton donor, base = proton acceptor. pH = -log₁₀[H⁺]. Strong acid: fully dissociates (HCl, H₂SO₄, HNO₃). Weak acid: partially dissociates, Ka = [H⁺][A⁻]/[HA]. pH of weak acid: pH = ½(pKa - log[HA]). Buffer: resists pH change on addition of small amounts of acid/base. Acidic buffer: weak acid + conjugate base (e.g., CH₃COOH + CH₃COONa). Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA]). Titration curves: strong-strong (pH 7), weak acid-strong base (pH > 7 at equivalence).",
+              "competences": ["Calculate pH of strong and weak acids", "Prepare and explain buffer solutions", "Interpret titration curves and select indicators"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

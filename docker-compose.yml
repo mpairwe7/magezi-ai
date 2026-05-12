@@ -1,0 +1,82 @@
+# =============================================================================
+# Magezi — A-Level STEM Tutor — Docker Compose
+# =============================================================================
+# Usage:
+#   docker compose up --build          # Full stack
+#   docker compose up redis qdrant api # Backend only
+#
+# Prerequisites:
+#   - ANTHROPIC_API_KEY in .env
+
+services:
+  # -- Redis (cache + rate limiting) -----------------------------------------
+  redis:
+    image: redis:7.4-alpine
+    ports: ["6379:6379"]
+    volumes: [redis_data:/data]
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # -- Qdrant (vector store) ------------------------------------------------
+  qdrant:
+    image: qdrant/qdrant:v1.17.1
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes: [qdrant_data:/qdrant/storage]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:6333/healthz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # -- FastAPI backend -------------------------------------------------------
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports: ["8000:8000"]
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./knowledge-base:/app/knowledge-base:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # -- Next.js frontend ------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports: ["3000:3000"]
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  qdrant_data:
