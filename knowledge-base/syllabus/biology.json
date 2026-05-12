@@ -1,0 +1,171 @@
+{
+  "subject": "biology",
+  "curriculum": "NCDC 2025 Competence-Based A-Level",
+  "level": "S.5-S.6",
+  "topics": [
+    {
+      "name": "Cell Biology",
+      "code": "BIO-01",
+      "topics": [
+        {
+          "name": "Cell Structure and Function",
+          "subtopics": [
+            {
+              "name": "Eukaryotic Cell Organelles",
+              "content": "Nucleus: contains DNA, controls cell activities, bounded by nuclear envelope with pores. Mitochondria: aerobic respiration, double membrane, cristae increase surface area, own DNA. Rough ER: studded with ribosomes, protein synthesis and transport. Smooth ER: lipid synthesis, detoxification. Golgi apparatus: modifies, packages, secretes proteins in vesicles. Ribosomes: 80S (60S+40S), site of translation. Lysosomes: hydrolytic enzymes, intracellular digestion. Cell membrane: phospholipid bilayer, fluid mosaic model (Singer-Nicolson), integral and peripheral proteins, cholesterol for fluidity.",
+              "competences": ["Draw and label eukaryotic cell with organelles", "Explain function of each organelle", "Compare prokaryotic and eukaryotic cells", "Describe fluid mosaic model"]
+            },
+            {
+              "name": "Membrane Transport",
+              "content": "Diffusion: passive movement from high to low concentration. Facilitated diffusion: via channel or carrier proteins (passive). Osmosis: movement of water through selectively permeable membrane from high water potential to low water potential. Water potential: ψ = ψs + ψp (solute potential + pressure potential). Active transport: against concentration gradient, requires ATP (e.g., sodium-potassium pump: 3Na⁺ out, 2K⁺ in). Endocytosis: phagocytosis (solids) and pinocytosis (liquids). Exocytosis: secretion of substances in vesicles.",
+              "competences": ["Explain diffusion, osmosis, and active transport", "Calculate water potential", "Describe the sodium-potassium pump", "Design osmosis experiments"]
+            }
+          ]
+        },
+        {
+          "name": "Cell Division",
+          "subtopics": [
+            {
+              "name": "Mitosis",
+              "content": "Mitosis produces two genetically identical daughter cells. Prophase: chromatin condenses, nuclear envelope breaks down, spindle forms. Metaphase: chromosomes align at metaphase plate. Anaphase: centromeres split, sister chromatids pulled to poles. Telophase: nuclear envelopes reform, chromosomes decondense. Cytokinesis: cytoplasm divides. Significance: growth, repair, asexual reproduction. Mitotic index = dividing cells / total cells. Uncontrolled mitosis → cancer (tumour suppressor genes p53 and Rb, oncogenes).",
+              "competences": ["Describe each phase of mitosis", "Calculate mitotic index", "Relate uncontrolled division to cancer"]
+            },
+            {
+              "name": "Meiosis",
+              "content": "Meiosis produces four genetically different haploid cells. Meiosis I: homologous pairs separate (reduction division). Prophase I: crossing over at chiasmata. Metaphase I: independent assortment of bivalents. Meiosis II: sister chromatids separate (like mitosis). Sources of genetic variation: crossing over, independent assortment, random fertilisation. Non-disjunction: failure to separate → aneuploidy (e.g., Down syndrome = trisomy 21). Significance: gamete production, maintains chromosome number, generates variation.",
+              "competences": ["Compare mitosis and meiosis", "Explain how crossing over and independent assortment generate variation", "Describe non-disjunction and its consequences"]
+            }
+          ]
+        },
+        {
+          "name": "Enzymes",
+          "subtopics": [
+            {
+              "name": "Enzyme Kinetics and Inhibition",
+              "content": "Enzymes are biological catalysts (proteins). Lock-and-key model: substrate fits exactly into active site. Induced-fit model: active site changes shape to fit substrate (more accurate). Factors affecting rate: temperature (optimum ~37°C for human enzymes), pH (optimum varies), substrate concentration, enzyme concentration. Michaelis-Menten kinetics: V = Vmax[S]/(Km + [S]). Km = substrate concentration at ½Vmax. Competitive inhibition: inhibitor competes for active site, increases apparent Km, Vmax unchanged. Non-competitive inhibition: inhibitor binds elsewhere, changes shape of active site, Vmax decreases, Km unchanged.",
+              "competences": ["Explain lock-and-key and induced-fit models", "Interpret Michaelis-Menten curves", "Distinguish competitive from non-competitive inhibition"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Molecular Biology and Genetics",
+      "code": "BIO-02",
+      "topics": [
+        {
+          "name": "DNA and Protein Synthesis",
+          "subtopics": [
+            {
+              "name": "DNA Replication",
+              "content": "Semi-conservative replication (Meselson-Stahl experiment). Steps: helicase unwinds double helix, SSB proteins stabilise single strands, primase adds RNA primer, DNA polymerase III adds nucleotides 5'→3', leading strand synthesised continuously, lagging strand in Okazaki fragments, DNA ligase joins fragments, DNA polymerase I replaces primers with DNA. Accuracy: proofreading by DNA polymerase, mismatch repair enzymes.",
+              "competences": ["Describe semi-conservative replication", "Explain roles of helicase, polymerase, ligase", "Describe leading and lagging strand synthesis"]
+            },
+            {
+              "name": "Transcription and Translation",
+              "content": "Transcription: RNA polymerase binds to promoter, unwinds DNA, synthesises mRNA 5'→3' using template strand (3'→5'). In eukaryotes: pre-mRNA → splicing (introns removed, exons joined) → mature mRNA. mRNA leaves nucleus via nuclear pores. Translation: ribosome binds to mRNA at start codon (AUG). tRNA with complementary anticodon brings amino acid. Peptide bond forms between amino acids. Ribosome moves along mRNA. Stop codons (UAA, UAG, UGA) terminate translation. Genetic code: triplet, degenerate, universal, non-overlapping.",
+              "competences": ["Describe transcription in prokaryotes and eukaryotes", "Explain translation step by step", "Use codon table to determine amino acid sequences"]
+            }
+          ]
+        },
+        {
+          "name": "Inheritance",
+          "subtopics": [
+            {
+              "name": "Mendelian Genetics and Extensions",
+              "content": "Mendel's First Law (Segregation): two alleles separate during gamete formation. Second Law (Independent Assortment): genes on different chromosomes inherited independently. Monohybrid cross: 3:1 ratio in F2. Dihybrid cross: 9:3:3:1 ratio in F2. Test cross: cross with homozygous recessive. Codominance: both alleles expressed (e.g., blood groups ABO: IA, IB, i). Incomplete dominance: blended phenotype. Sex-linked inheritance: genes on X chromosome (e.g., haemophilia, colour blindness) — more common in males. Autosomal linkage: genes on same chromosome, do not assort independently.",
+              "competences": ["Solve monohybrid, dihybrid, and sex-linked problems", "Draw Punnett squares and genetic diagrams", "Explain codominance and incomplete dominance"]
+            },
+            {
+              "name": "Mutations and Genetic Engineering",
+              "content": "Gene mutations: point mutations — substitution (silent, missense, nonsense), insertion, deletion (frameshift). Chromosome mutations: deletion, duplication, inversion, translocation, aneuploidy, polyploidy. Causes: spontaneous errors, mutagens (UV, chemicals, radiation). Genetic engineering: restriction enzymes cut DNA at specific sequences, ligase joins fragments, vectors (plasmids) carry genes into host cells. PCR: amplifies DNA (denature 95°C, anneal 55°C, extend 72°C). Applications: insulin production, gene therapy, GM crops.",
+              "competences": ["Describe types of gene and chromosome mutations", "Explain genetic engineering techniques", "Discuss applications and ethical issues of GMOs"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Physiology",
+      "code": "BIO-03",
+      "topics": [
+        {
+          "name": "Nervous System",
+          "subtopics": [
+            {
+              "name": "Nerve Impulse and Synaptic Transmission",
+              "content": "Resting potential: -70mV (K⁺ leak channels, Na⁺/K⁺ pump). Action potential: depolarisation (Na⁺ channels open, Na⁺ rushes in → +40mV), repolarisation (K⁺ channels open, K⁺ rushes out), hyperpolarisation, refractory period. All-or-nothing principle. Saltatory conduction in myelinated neurons (faster). Synapse: action potential → Ca²⁺ influx → vesicles fuse → neurotransmitter (e.g., acetylcholine) released → binds receptors on postsynaptic membrane → new action potential. Neurotransmitter removed by enzymes (acetylcholinesterase).",
+              "competences": ["Describe resting and action potentials", "Explain synaptic transmission step by step", "Compare myelinated and unmyelinated neurons"]
+            }
+          ]
+        },
+        {
+          "name": "Endocrine System",
+          "subtopics": [
+            {
+              "name": "Hormonal Control and Homeostasis",
+              "content": "Hormones: chemical messengers secreted by endocrine glands into blood. Insulin (β-cells of pancreas): lowers blood glucose → promotes glycogenesis, increases glucose uptake. Glucagon (α-cells): raises blood glucose → promotes glycogenolysis, gluconeogenesis. Negative feedback: response reduces the stimulus. ADH (posterior pituitary): increases water reabsorption in collecting duct → concentrated urine. Adrenaline (adrenal medulla): fight-or-flight response. Thyroxine: metabolic rate regulation (iodine needed). Diabetes: Type 1 (no insulin), Type 2 (insulin resistance).",
+              "competences": ["Explain insulin-glucagon regulation of blood glucose", "Describe ADH and osmoregulation", "Distinguish Type 1 and Type 2 diabetes"]
+            }
+          ]
+        },
+        {
+          "name": "Cardiovascular System",
+          "subtopics": [
+            {
+              "name": "Heart Structure and Circulation",
+              "content": "Double circulation: pulmonary (heart → lungs → heart) and systemic (heart → body → heart). Heart chambers: right atrium receives deoxygenated blood via vena cava; right ventricle pumps to lungs via pulmonary artery; left atrium receives oxygenated blood via pulmonary veins; left ventricle pumps to body via aorta. Left ventricle wall thicker (higher pressure). Cardiac cycle: atrial systole → ventricular systole → diastole. Heart rate controlled by SAN (pacemaker), AVN, bundle of His, Purkinje fibres. Blood pressure: systolic/diastolic (120/80 mmHg normal).",
+              "competences": ["Describe structure and function of the heart", "Trace path of blood through double circulation", "Explain the cardiac cycle and ECG"]
+            }
+          ]
+        },
+        {
+          "name": "Respiration",
+          "subtopics": [
+            {
+              "name": "Aerobic and Anaerobic Respiration",
+              "content": "Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP. Stages: glycolysis (cytoplasm, glucose → 2 pyruvate, 2 ATP net), link reaction (pyruvate → acetyl CoA + CO₂), Krebs cycle (mitochondrial matrix, acetyl CoA → CO₂ + reduced NAD/FAD), oxidative phosphorylation (inner mitochondrial membrane, electron transport chain, chemiosmosis, 34 ATP). Anaerobic in animals: pyruvate → lactate (oxygen debt). Anaerobic in yeast: pyruvate → ethanol + CO₂ (fermentation). Respiratory quotient RQ = CO₂ produced / O₂ consumed. RQ = 1 for carbohydrates, <1 for fats, >1 for anaerobic.",
+              "competences": ["Describe all stages of aerobic respiration", "Compare aerobic and anaerobic respiration", "Calculate and interpret respiratory quotient"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ecology and Plant Biology",
+      "code": "BIO-04",
+      "topics": [
+        {
+          "name": "Ecosystems and Energy Flow",
+          "subtopics": [
+            {
+              "name": "Food Chains, Nutrient Cycling, and Conservation",
+              "content": "Energy flow: sun → producers → primary consumers → secondary consumers → tertiary consumers. ~10% energy transfer efficiency between trophic levels (rest lost as heat via respiration). Pyramids of number, biomass, energy. Carbon cycle: photosynthesis removes CO₂, respiration/combustion release CO₂, decomposition recycles. Nitrogen cycle: nitrogen fixation (Rhizobium in root nodules, lightning), nitrification (NH₄⁺ → NO₂⁻ → NO₃⁻ by Nitrosomonas and Nitrobacter), denitrification (NO₃⁻ → N₂). Biodiversity: species richness × evenness. Conservation: in-situ (national parks), ex-situ (seed banks, zoos). Ugandan examples: Bwindi Impenetrable Forest (gorillas), Lake Victoria (Nile perch impact on cichlids).",
+              "competences": ["Draw and explain food chains and webs", "Describe carbon and nitrogen cycles", "Discuss conservation strategies using Ugandan examples"]
+            }
+          ]
+        },
+        {
+          "name": "Photosynthesis",
+          "subtopics": [
+            {
+              "name": "Light and Dark Reactions",
+              "content": "Overall: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (light energy). Light-dependent reactions (thylakoid membranes): photolysis of water (2H₂O → 4H⁺ + 4e⁻ + O₂), electron transport chain, photophosphorylation (ATP), reduction of NADP⁺ → NADPH. Light-independent reactions (Calvin cycle, stroma): CO₂ fixation by RuBisCO (CO₂ + RuBP → 2GP), reduction of GP to G3P (using ATP + NADPH), regeneration of RuBP. Limiting factors: light intensity, CO₂ concentration, temperature. Law of limiting factors: rate determined by factor furthest from optimum.",
+              "competences": ["Describe light-dependent and light-independent reactions", "Explain role of RuBisCO in Calvin cycle", "Interpret graphs of limiting factors"]
+            }
+          ]
+        },
+        {
+          "name": "Plant Transport",
+          "subtopics": [
+            {
+              "name": "Transpiration and Translocation",
+              "content": "Transpiration: loss of water vapour from leaves through stomata. Transpiration stream: root hair cells → xylem → leaves. Cohesion-tension theory: water molecules cohere via hydrogen bonds, creating continuous column pulled up by transpiration. Factors affecting rate: temperature, humidity, wind speed, light intensity. Measured with potometer. Translocation: transport of sucrose and amino acids in phloem. Mass flow hypothesis (Münch): high pressure at source (leaves), low pressure at sink (roots, fruits). Loading: active transport of sucrose into sieve tubes (companion cells pump H⁺, sucrose co-transported).",
+              "competences": ["Explain cohesion-tension theory", "Describe factors affecting transpiration rate", "Explain mass flow hypothesis for translocation"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

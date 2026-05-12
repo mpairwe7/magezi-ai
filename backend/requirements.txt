@@ -1,0 +1,28 @@
+# Magezi — A-Level STEM Tutor Dependencies
+# Python 3.11+
+
+# API framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+pydantic==2.11.3
+
+# Claude API
+anthropic==0.52.0
+
+# Vector store
+qdrant-client==1.14.2
+
+# Embeddings + reranking
+sentence-transformers==4.1.0
+torch>=2.5.0
+
+# Redis cache
+redis==5.3.0
+
+# Auth
+PyJWT[crypto]>=2.8.0
+bcrypt>=4.1.0
+
+# Utilities
+python-dotenv==1.1.0
+python-multipart==0.0.20

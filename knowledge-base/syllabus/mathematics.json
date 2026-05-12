@@ -1,0 +1,171 @@
+{
+  "subject": "mathematics",
+  "curriculum": "NCDC 2025 Competence-Based A-Level",
+  "level": "S.5-S.6",
+  "topics": [
+    {
+      "name": "Pure Mathematics — Algebra",
+      "code": "MAT-01",
+      "topics": [
+        {
+          "name": "Quadratic Functions",
+          "subtopics": [
+            {
+              "name": "Solving Quadratic Equations",
+              "content": "Standard form: ax² + bx + c = 0. Methods: (1) Factorisation. (2) Completing the square: x² + bx = (x + b/2)² - (b/2)². (3) Quadratic formula: x = (-b ± √(b²-4ac))/(2a). Discriminant Δ = b²-4ac: Δ > 0 (two real roots), Δ = 0 (repeated root), Δ < 0 (no real roots). Sum of roots = -b/a. Product of roots = c/a. Forming equations: x² - (sum)x + (product) = 0.",
+              "competences": ["Solve by factorisation, completing square, and formula", "Use discriminant to determine nature of roots", "Form equations given roots"]
+            }
+          ]
+        },
+        {
+          "name": "Polynomials",
+          "subtopics": [
+            {
+              "name": "Factor and Remainder Theorems",
+              "content": "Factor theorem: if f(a) = 0, then (x - a) is a factor of f(x). Remainder theorem: when f(x) is divided by (x - a), remainder = f(a). Polynomial long division: divide to find quotient and remainder. Synthetic division for linear divisors. Solving cubics: find one root by trial (factor theorem), then factorise remaining quadratic. Partial fractions: proper fractions decomposed into simpler fractions. Linear factors: A/(x-a) + B/(x-b). Repeated: A/(x-a) + B/(x-a)². Irreducible quadratic: (Ax+B)/(x²+c).",
+              "competences": ["Apply factor and remainder theorems", "Perform polynomial division", "Decompose into partial fractions"]
+            }
+          ]
+        },
+        {
+          "name": "Indices, Logarithms, and Exponentials",
+          "subtopics": [
+            {
+              "name": "Laws of Indices and Logarithms",
+              "content": "Index laws: aᵐ × aⁿ = aᵐ⁺ⁿ, aᵐ/aⁿ = aᵐ⁻ⁿ, (aᵐ)ⁿ = aᵐⁿ, a⁰ = 1, a⁻ⁿ = 1/aⁿ, a^(1/n) = ⁿ√a. Logarithm: if aˣ = b then x = logₐb. Log laws: log(ab) = log(a) + log(b), log(a/b) = log(a) - log(b), log(aⁿ) = n·log(a). Change of base: logₐb = logcb/logca. Natural log: ln(x) = logₑ(x). Exponential function: y = eˣ, dy/dx = eˣ. Solving exponential equations: take log of both sides.",
+              "competences": ["Simplify expressions using index laws", "Solve equations using logarithms", "Sketch exponential and logarithmic graphs"]
+            }
+          ]
+        },
+        {
+          "name": "Sequences and Series",
+          "subtopics": [
+            {
+              "name": "Arithmetic and Geometric Progressions",
+              "content": "AP: nth term aₙ = a + (n-1)d. Sum: Sₙ = n/2(2a + (n-1)d) = n/2(a + l). GP: nth term aₙ = arⁿ⁻¹. Sum: Sₙ = a(1-rⁿ)/(1-r) for r ≠ 1. Sum to infinity (|r| < 1): S∞ = a/(1-r). Sigma notation: Σ. Binomial expansion: (a+b)ⁿ = Σ C(n,r)aⁿ⁻ʳbʳ. C(n,r) = n!/(r!(n-r)!). Pascal's triangle gives coefficients. Valid for positive integer n. For fractional/negative n: (1+x)ⁿ = 1 + nx + n(n-1)x²/2! + ... (|x| < 1).",
+              "competences": ["Find nth terms and sums of AP and GP", "Determine convergence of geometric series", "Apply binomial expansion"]
+            }
+          ]
+        },
+        {
+          "name": "Inequalities",
+          "subtopics": [
+            {
+              "name": "Linear and Quadratic Inequalities",
+              "content": "Linear: solve like equation but reverse sign when multiplying/dividing by negative. Quadratic: solve ax² + bx + c > 0 by finding roots and testing intervals (sign diagram). Critical values method: find where expression = 0, test regions. Modulus: |x - a| < b means a - b < x < a + b. |x - a| > b means x < a - b or x > a + b. Rational inequalities: find critical values (numerator = 0 and denominator = 0), test intervals.",
+              "competences": ["Solve linear, quadratic, and modulus inequalities", "Use sign diagrams", "Represent solutions on number lines"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pure Mathematics — Calculus",
+      "code": "MAT-02",
+      "topics": [
+        {
+          "name": "Differentiation",
+          "subtopics": [
+            {
+              "name": "Rules and Applications of Differentiation",
+              "content": "Power rule: d/dx(xⁿ) = nxⁿ⁻¹. Product rule: d/dx(uv) = u'v + uv'. Quotient rule: d/dx(u/v) = (u'v - uv')/v². Chain rule: d/dx(f(g(x))) = f'(g(x))·g'(x). d/dx(sin x) = cos x, d/dx(cos x) = -sin x, d/dx(tan x) = sec²x. d/dx(eˣ) = eˣ, d/dx(ln x) = 1/x. Implicit differentiation: differentiate both sides w.r.t. x, collect dy/dx terms. Applications: gradients, tangents (y - y₁ = m(x - x₁)), normals (gradient = -1/m), stationary points (dy/dx = 0, classify with d²y/dx²: positive = min, negative = max). Rates of change: connected rates via chain rule.",
+              "competences": ["Apply all differentiation rules", "Find tangents, normals, and stationary points", "Solve connected rates of change problems"]
+            }
+          ]
+        },
+        {
+          "name": "Integration",
+          "subtopics": [
+            {
+              "name": "Methods and Applications of Integration",
+              "content": "Reverse of differentiation: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C. ∫1/x dx = ln|x| + C. ∫eˣ dx = eˣ + C. ∫sin x dx = -cos x + C. ∫cos x dx = sin x + C. ∫sec²x dx = tan x + C. Substitution: let u = g(x), du = g'(x)dx. Integration by parts: ∫u dv = uv - ∫v du (LIATE for choosing u). Partial fractions: split rational functions before integrating. Definite integrals: ∫[a,b] f(x)dx = F(b) - F(a). Area under curve = ∫|f(x)|dx. Area between curves = ∫(f(x) - g(x))dx. Volume of revolution: V = π∫y²dx (about x-axis).",
+              "competences": ["Integrate standard functions", "Apply substitution and integration by parts", "Calculate areas and volumes of revolution"]
+            }
+          ]
+        },
+        {
+          "name": "Differential Equations",
+          "subtopics": [
+            {
+              "name": "First-Order Differential Equations",
+              "content": "Separation of variables: dy/dx = f(x)g(y) → ∫(1/g(y))dy = ∫f(x)dx. First-order linear: dy/dx + P(x)y = Q(x), integrating factor μ = e^(∫P dx), solution: y·μ = ∫Q·μ dx. Modelling: population growth (dN/dt = kN → N = N₀eᵏᵗ), radioactive decay (dN/dt = -λN → N = N₀e⁻λᵗ), Newton's cooling (dT/dt = -k(T - Tₛ)).",
+              "competences": ["Solve by separation of variables", "Use integrating factor method", "Model real-world situations with differential equations"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pure Mathematics — Trigonometry and Coordinate Geometry",
+      "code": "MAT-03",
+      "topics": [
+        {
+          "name": "Trigonometry",
+          "subtopics": [
+            {
+              "name": "Identities and Equations",
+              "content": "Pythagorean: sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ, 1 + cot²θ = csc²θ. Double angle: sin(2θ) = 2sinθcosθ, cos(2θ) = cos²θ - sin²θ = 2cos²θ - 1 = 1 - 2sin²θ. Addition: sin(A±B) = sinAcosB ± cosAsinB, cos(A±B) = cosAcosB ∓ sinAsinB. R-formula: a sinθ + b cosθ = R sin(θ + α) where R = √(a²+b²), tan α = b/a. Solving equations: find principal value, use symmetry/periodicity for all solutions in range. Inverse trig functions: arcsin, arccos, arctan domains and ranges.",
+              "competences": ["Prove trigonometric identities", "Solve equations in given intervals", "Express a sinθ + b cosθ in R sin(θ + α) form"]
+            }
+          ]
+        },
+        {
+          "name": "Coordinate Geometry",
+          "subtopics": [
+            {
+              "name": "Lines, Circles, and Parametric Equations",
+              "content": "Straight line: y - y₁ = m(x - x₁). Gradient: m = (y₂-y₁)/(x₂-x₁). Perpendicular: m₁·m₂ = -1. Distance: d = √((x₂-x₁)² + (y₂-y₁)²). Midpoint: ((x₁+x₂)/2, (y₁+y₂)/2). Circle: (x-a)² + (y-b)² = r², centre (a,b), radius r. Expanded: x² + y² + 2gx + 2fy + c = 0, centre (-g,-f), radius √(g²+f²-c). Tangent to circle: perpendicular to radius at point of contact. Parametric equations: x = f(t), y = g(t). dy/dx = (dy/dt)/(dx/dt). Convert to Cartesian by eliminating parameter.",
+              "competences": ["Find equations of lines, circles, tangents", "Convert between parametric and Cartesian forms", "Find intersection points of lines and circles"]
+            }
+          ]
+        },
+        {
+          "name": "Vectors",
+          "subtopics": [
+            {
+              "name": "Vector Algebra and Applications",
+              "content": "Vectors: magnitude and direction. Position vector: r = xi + yj + zk. Magnitude: |r| = √(x²+y²+z²). Unit vector: r̂ = r/|r|. Addition: a + b (triangle/parallelogram law). Scalar product: a·b = |a||b|cosθ = a₁b₁ + a₂b₂ + a₃b₃. If a·b = 0, vectors are perpendicular. Vector equation of line: r = a + tb (a = point, b = direction). Scalar product form of plane: r·n = d. Angle between lines: cosθ = |a·b|/(|a||b|). Distance from point to line and plane formulae.",
+              "competences": ["Perform vector addition and scalar product", "Write vector equations of lines", "Find angles between lines and planes"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Statistics and Probability",
+      "code": "MAT-04",
+      "topics": [
+        {
+          "name": "Data and Measures",
+          "subtopics": [
+            {
+              "name": "Descriptive Statistics",
+              "content": "Measures of central tendency: mean (x̄ = Σx/n), median (middle value), mode (most frequent). For grouped data: mean = Σfx/Σf, median from cumulative frequency curve. Measures of dispersion: range, interquartile range (IQR = Q₃ - Q₁), variance (σ² = Σ(x-x̄)²/n), standard deviation (σ = √variance). For sample: s² = Σ(x-x̄)²/(n-1). Coding: if y = (x-a)/b then ȳ = (x̄-a)/b, σᵧ = σₓ/b. Box plots: show median, quartiles, range, outliers (beyond 1.5×IQR).",
+              "competences": ["Calculate mean, median, mode for raw and grouped data", "Calculate variance and standard deviation", "Interpret box plots and cumulative frequency diagrams"]
+            }
+          ]
+        },
+        {
+          "name": "Probability Distributions",
+          "subtopics": [
+            {
+              "name": "Binomial and Normal Distributions",
+              "content": "Binomial B(n,p): fixed n trials, two outcomes, constant p, independent. P(X=r) = C(n,r)p^r(1-p)^(n-r). Mean: μ = np. Variance: σ² = np(1-p). Normal N(μ,σ²): continuous, bell-shaped, symmetric about μ. 68% within 1σ, 95% within 2σ, 99.7% within 3σ. Standard normal Z ~ N(0,1): Z = (X-μ)/σ. Use tables to find P(Z < z). Normal approximation to binomial: if n is large and np > 5: X ~ N(np, np(1-p)) with continuity correction (±0.5).",
+              "competences": ["Calculate binomial probabilities", "Standardise and use normal distribution tables", "Apply normal approximation to binomial"]
+            }
+          ]
+        },
+        {
+          "name": "Hypothesis Testing",
+          "subtopics": [
+            {
+              "name": "Significance Tests",
+              "content": "Null hypothesis H₀: no effect/difference (parameter = stated value). Alternative hypothesis H₁: one-tailed or two-tailed. Significance level α: typically 5% (0.05) or 1% (0.01). Test statistic: calculated from sample data. Critical region: values that lead to rejection of H₀. p-value: probability of observing result as extreme as sample, assuming H₀ true. If p-value < α, reject H₀. Type I error: rejecting H₀ when true (probability = α). Type II error: not rejecting H₀ when false. For proportions: Z = (p̂ - p₀)/√(p₀(1-p₀)/n). For means: Z = (x̄ - μ₀)/(σ/√n) or t = (x̄ - μ₀)/(s/√n).",
+              "competences": ["Set up null and alternative hypotheses", "Perform z-tests and t-tests", "Interpret p-values and significance levels"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
