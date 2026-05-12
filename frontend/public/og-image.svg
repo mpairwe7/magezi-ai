@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#040a06"/><stop offset="100%" stop-color="#0c1a14"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="100" y="220" font-family="system-ui,sans-serif" font-size="72" font-weight="bold" fill="white">Magezi</text>
+  <text x="100" y="280" font-family="system-ui,sans-serif" font-size="32" fill="#22c55e" font-style="italic">"The Wise One"</text>
+  <text x="100" y="350" font-family="system-ui,sans-serif" font-size="36" fill="#eab308">A-Level STEM Tutor for Uganda</text>
+  <text x="100" y="420" font-family="system-ui,sans-serif" font-size="24" fill="#86efac">Physics • Chemistry • Biology • Mathematics</text>
+  <text x="100" y="470" font-family="system-ui,sans-serif" font-size="20" fill="#6ee7b7">NCDC 2025 Competence-Based Curriculum</text>
+  <text x="100" y="530" font-family="system-ui,sans-serif" font-size="20" fill="#4ade80">English • Luganda • Swahili • Runyankole</text>
+  <circle cx="1050" cy="315" r="120" fill="none" stroke="#22c55e" stroke-width="4"/>
+  <text x="1050" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" fill="white">📚</text>
+  <text x="1050" y="350" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#22c55e">STEM</text>
+</svg>

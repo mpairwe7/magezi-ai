@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://magezi-ai.renu-01.cranecloud.io'),
   title: 'Magezi — A-Level STEM Tutor',
   description:
     'Wisdom in your language. AI-powered A-Level STEM tutor for Ugandan students, aligned to the NCDC 2025 Competence-Based Curriculum.',
@@ -29,9 +30,22 @@ export const metadata: Metadata = {
     apple: '/icon-192.png',
   },
   openGraph: {
-    title: 'Magezi — The Wise One',
-    description: 'A-Level STEM Tutor in Luganda, Swahili, Runyankole & English',
+    title: 'Magezi — A-Level STEM Tutor for Uganda',
+    description:
+      'AI-powered Physics, Chemistry, Biology & Mathematics tutoring aligned to NCDC 2025 Competence-Based Curriculum. In English, Luganda, Swahili & Runyankole.',
+    siteName: 'Magezi AI',
+    locale: 'en_UG',
     type: 'website',
+    url: '/',
+    images: [
+      { url: '/og-image.svg', width: 1200, height: 630, alt: 'Magezi — A-Level STEM Tutor for Uganda', type: 'image/svg+xml' },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Magezi — A-Level STEM Tutor',
+    description: 'AI-powered STEM tutoring for Ugandan A-Level students. Physics, Chemistry, Biology & Maths — NCDC 2025 curriculum.',
+    images: ['/og-image.svg'],
   },
 };
 
