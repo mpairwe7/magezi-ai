@@ -317,31 +317,41 @@ export const useChatStore = create<ChatStore>()(
       setWorkspace: (userId) =>
         set((state) => {
           const workspace: WorkspaceMode = userId ? 'account' : 'anonymous';
-          const nextState: Partial<ChatStore> = {
-            workspace,
-            userId,
-          };
+          const workspaceUnchanged = state.workspace === workspace && state.userId === userId;
 
           if (!userId) {
-            nextState.conversationsByWorkspace = {
-              ...state.conversationsByWorkspace,
-              account: {},
-            };
-            nextState.orderByWorkspace = {
-              ...state.orderByWorkspace,
-              account: [],
-            };
-            nextState.activeConversationIdByWorkspace = {
-              ...state.activeConversationIdByWorkspace,
-              account: null,
-            };
-            return nextState as ChatStore;
+            const accountEmpty = state.orderByWorkspace.account.length === 0
+              && state.activeConversationIdByWorkspace.account === null
+              && Object.keys(state.conversationsByWorkspace.account).length === 0;
+            if (workspaceUnchanged && accountEmpty) {
+              return state;
+            }
+            return {
+              workspace,
+              userId,
+              conversationsByWorkspace: {
+                ...state.conversationsByWorkspace,
+                account: {},
+              },
+              orderByWorkspace: {
+                ...state.orderByWorkspace,
+                account: [],
+              },
+              activeConversationIdByWorkspace: {
+                ...state.activeConversationIdByWorkspace,
+                account: null,
+              },
+            } as Partial<ChatStore> as ChatStore;
           }
 
           const hasAccountConversation = state.orderByWorkspace.account.length > 0
             && state.activeConversationIdByWorkspace.account
             && state.conversationsByWorkspace.account[state.activeConversationIdByWorkspace.account];
-          if (hasAccountConversation) return nextState as ChatStore;
+          if (hasAccountConversation) {
+            if (workspaceUnchanged) return state;
+            return { workspace, userId } as Partial<ChatStore> as ChatStore;
+          }
+          const nextState: Partial<ChatStore> = { workspace, userId };
 
           const created = createConversationRecord('account', state.preferredLocale, {
             synced: false,
@@ -362,20 +372,26 @@ export const useChatStore = create<ChatStore>()(
           return nextState as ChatStore;
         }),
       clearAccountWorkspace: () =>
-        set((state) => ({
-          conversationsByWorkspace: {
-            ...state.conversationsByWorkspace,
-            account: {},
-          },
-          orderByWorkspace: {
-            ...state.orderByWorkspace,
-            account: [],
-          },
-          activeConversationIdByWorkspace: {
-            ...state.activeConversationIdByWorkspace,
-            account: null,
-          },
-        })),
+        set((state) => {
+          const accountEmpty = state.orderByWorkspace.account.length === 0
+            && state.activeConversationIdByWorkspace.account === null
+            && Object.keys(state.conversationsByWorkspace.account).length === 0;
+          if (accountEmpty) return state;
+          return {
+            conversationsByWorkspace: {
+              ...state.conversationsByWorkspace,
+              account: {},
+            },
+            orderByWorkspace: {
+              ...state.orderByWorkspace,
+              account: [],
+            },
+            activeConversationIdByWorkspace: {
+              ...state.activeConversationIdByWorkspace,
+              account: null,
+            },
+          };
+        }),
       setSpeechState: (state) => set({ speechState: state }),
       setPreferredLocale: (locale) => set({ preferredLocale: locale }),
       setAutoNarrate: (on) => set({ autoNarrate: on }),
@@ -462,16 +478,25 @@ export const useChatStore = create<ChatStore>()(
           },
         })),
       setActiveConversation: (id, workspace = get().workspace) =>
-        set((state) => ({
-          activeConversationIdByWorkspace: {
-            ...state.activeConversationIdByWorkspace,
-            [workspace]: id,
-          },
-          orderByWorkspace: {
-            ...state.orderByWorkspace,
-            [workspace]: [id, ...state.orderByWorkspace[workspace].filter((conversationId) => conversationId !== id)],
-          },
-        })),
+        set((state) => {
+          const currentActive = state.activeConversationIdByWorkspace[workspace];
+          const currentOrder = state.orderByWorkspace[workspace];
+          if (currentActive === id && currentOrder[0] === id) {
+            return state;
+          }
+          return {
+            activeConversationIdByWorkspace: {
+              ...state.activeConversationIdByWorkspace,
+              [workspace]: id,
+            },
+            orderByWorkspace: {
+              ...state.orderByWorkspace,
+              [workspace]: currentOrder[0] === id
+                ? currentOrder
+                : [id, ...currentOrder.filter((conversationId) => conversationId !== id)],
+            },
+          };
+        }),
       setDraft: (id, value, workspace = get().workspace) =>
         set((state) => withConversation(state, workspace, id, (conversation) => ({
           ...conversation,
@@ -496,11 +521,12 @@ export const useChatStore = create<ChatStore>()(
           updatedAt: Date.now(),
         }))),
       setConversationStatus: (id, status, error = '', workspace = get().workspace) =>
-        set((state) => withConversation(state, workspace, id, (conversation) => ({
-          ...conversation,
-          status,
-          lastError: error,
-        }))),
+        set((state) => withConversation(state, workspace, id, (conversation) => {
+          if (conversation.status === status && conversation.lastError === error) {
+            return conversation;
+          }
+          return { ...conversation, status, lastError: error };
+        })),
       addTurns: (id, turns, workspace = get().workspace) =>
         set((state) => withConversation(state, workspace, id, (conversation) => {
           const nextTurns = [...conversation.turns, ...turns].slice(-MAX_CHAT_TURNS);

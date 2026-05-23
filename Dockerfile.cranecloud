@@ -12,7 +12,12 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 
 COPY backend/requirements.txt ./
-RUN pip install --upgrade pip && pip install -r requirements.txt && \
+# Install CPU torch first so the requirements.txt resolver finds torch already
+# satisfied (>=2.5.0) and doesn't pull the 2GB+ CUDA wheel + nvidia-* deps.
+# Trims ~3GB off the final image; Crane Cloud nodes are CPU-only anyway.
+RUN pip install --upgrade pip && \
+    pip install --index-url https://download.pytorch.org/whl/cpu torch && \
+    pip install -r requirements.txt && \
     find /opt/venv -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null; \
     find /opt/venv -name "*.dist-info" -type d -exec rm -rf {} + 2>/dev/null; true
 
@@ -86,7 +91,10 @@ pidfile=/tmp/supervisord.pid
 user=root
 
 [program:backend]
-command=sh -c "exec /opt/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8081 --workers 1"
+; Crane Cloud RENU CoreDNS resolves internal services but not external hosts.
+; Pin Cloudflare-fronted Groq + Anthropic IPs in /etc/hosts so LLM calls work.
+; Refresh via `dig api.groq.com` if Cloudflare reshuffles.
+command=sh -c "grep -q api.groq.com /etc/hosts || { echo '172.64.149.20 api.groq.com'; echo '104.18.38.236 api.groq.com'; echo '160.79.104.10 api.anthropic.com'; } >> /etc/hosts; exec /opt/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8081 --workers 1"
 directory=/app/backend
 environment=HOME="/app",PORT="8081",KNOWLEDGE_BASE_DIR="/app/knowledge-base",BM25_STATE_PATH="/app/knowledge-base/bm25_state.json"
 stdout_logfile=/dev/stdout

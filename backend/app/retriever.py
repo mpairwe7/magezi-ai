@@ -155,6 +155,9 @@ class HybridRetriever:
             reset_timeout=10.0,
             max_timeout=300.0,
         )
+        # CPU-only: cache query embeddings — same students ask same things across turns.
+        self._query_embed_cache: dict[str, list[float]] = {}
+        self._query_embed_cache_max = 1024
 
     def initialize(self) -> bool:
         """Connect to Qdrant and load models."""
@@ -178,9 +181,11 @@ class HybridRetriever:
 
             from sentence_transformers import CrossEncoder, SentenceTransformer
 
-            self._dense_model = SentenceTransformer(DENSE_MODEL_NAME)
+            # CPU-only deployment: pin device explicitly so torch doesn't probe
+            # for CUDA / spend startup time on a device that isn't there.
+            self._dense_model = SentenceTransformer(DENSE_MODEL_NAME, device="cpu")
             if RERANK_ENABLED:
-                self._reranker = CrossEncoder(RERANKER_MODEL_NAME)
+                self._reranker = CrossEncoder(RERANKER_MODEL_NAME, device="cpu")
 
             self._ready = True
             logger.info(
@@ -220,7 +225,14 @@ class HybridRetriever:
         try:
             from qdrant_client import models
 
-            dense_vec = self._dense_model.encode(query).tolist()
+            cached = self._query_embed_cache.get(query)
+            if cached is not None:
+                dense_vec = cached
+            else:
+                dense_vec = self._dense_model.encode(query).tolist()
+                if len(self._query_embed_cache) >= self._query_embed_cache_max:
+                    self._query_embed_cache.pop(next(iter(self._query_embed_cache)))
+                self._query_embed_cache[query] = dense_vec
             sparse_idx, sparse_val = self._sparse_encoder.encode(query)
 
             # Subject filter

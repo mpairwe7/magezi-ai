@@ -1,64 +1,92 @@
-# Magezi Architecture Decisions
+# CLAUDE.md
 
-## LLM Backend: Groq (Llama 3.3 70B)
-Primary LLM is **Groq** running Llama 3.3 70B Versatile (free tier). Falls back to Claude Sonnet 4 if Anthropic API key is available. Falls back to structured local response if both fail.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Retry logic**: On HTTP 429 (rate limit), retries 3 times with exponential backoff (2s, 4s). On all retries exhausted, the formatted local fallback kicks in — student always gets a response.
+## Commands
 
-**Fallback chain**: Groq stream → Groq retry → Local formatted response (word-by-word SSE chunks).
+### Backend (FastAPI, Python 3.11+, run from `backend/`)
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000     # dev server
+pytest tests/                                  # all tests
+pytest tests/test_voice_vad.py -k prosody     # single test by name
+python -m app.indexer                          # extract 4,457 passages from NCDC PDFs
+```
 
-## Agentic Tutor Loop
-Every query goes through `tutor_loop.py` before generation:
-1. **Complexity detection**: simple (2 steps) / moderate (4 steps) / complex (6 steps)
-2. **Calculation awareness**: detects numeric problems, injects formulas
-3. **Multi-retrieval**: "Compare X and Y" splits into sub-queries, retrieves each separately
-4. **Teaching plan**: injected into LLM prompt so responses follow NCDC pedagogy
+### Frontend (Next.js 16, run from `frontend/`)
+```bash
+bun install
+bun run dev          # next dev --turbopack -p 3334
+bun run build        # produces standalone output (next.config.ts:7)
+bun run lint         # next lint
+bun run type-check   # tsc --noEmit
+```
 
-## STEM Tools (`tools.py`)
-- **18 physical constants** (NIST CODATA): speed of light, Planck, Boltzmann, etc.
-- **47 formulas** across 4 subjects: F=ma, pH=-log[H+], quadratic formula, etc.
-- **Safe calculator**: evaluates expressions without arbitrary code execution
-- Tool context injected into every prompt + appended to local fallback responses
+### Knowledge base
+```bash
+./scripts/reindex.sh           # rebuild Qdrant collection from knowledge-base/syllabus/*.json
+./scripts/reindex.sh --check   # health check only
+```
 
-## Knowledge Base (4,457 passages)
-- **Source**: 4 official NCDC 2025 syllabus PDFs (288 pages)
-- **Extraction**: `indexer.py` uses PyMuPDF, chunks ~160 words with overlap
-- **Structured data**: 4 JSON files with topics, subtopics, competences (68 entries)
-- **Retrieval**: Keyword search with bigram boosting + section title matching
-- **Multilingual bridge**: 120 Luganda/Swahili/Runyankole terms → English
+### Docker
+```bash
+docker compose up --build                          # full stack (redis + qdrant + api + frontend)
+docker compose up redis qdrant api                 # backend only
+docker build -f Dockerfile.cranecloud -t magezi .  # single-image production build for Crane Cloud
+```
 
-## SSE Streaming + Fallback
-- Groq tokens stream via SSE `data:` events
-- If Groq fails (429/403), `_chunk_fallback()` yields the formatted local response word-by-word — frontend renders identically
-- Faithfulness: LLM responses scored by token overlap; local fallback trusted at 0.95
-- Multi-turn context: `_save_turn()` called after stream completes; 5-turn sliding window
+### Port conventions (intentionally mismatched across configs — read before changing)
+| Config | Backend | Frontend |
+|---|---|---|
+| `frontend/package.json` dev script | — | 3334 |
+| `.env` / `docker-compose.yml` | 8000 | 3000 |
+| `.env.example` (`NEXT_PUBLIC_API_URL`) | 8802 | — |
+| `Dockerfile.cranecloud` (supervisord) | 8081 internal, nginx fronts on 8080 | 3000 internal |
 
-## Frontend Chat UX (Grok-Inspired)
-- **Markdown rendering**: react-markdown + remark-gfm + normaliseMarkdown() preprocessor
-- **Action buttons**: Copy (clipboard API + checkmark), Regenerate (resends last query), Listen (Web Speech TTS), Thumbs up/down (TanStack mutation)
-- **Scroll-to-bottom**: Floating button appears when >200px from bottom
-- **Expand/collapse**: Messages >1500 chars get toggle with gradient fade
-- **Citations auto-expanded**: `<details open>` shows sources immediately
-- **Quick suggestions**: Context-aware chips — starters before first message, follow-ups after
-- **Mobile-first**: 100dvh, 32px avatars on mobile, sticky composer with safe-area padding
+## Architecture
 
-## State Management
-| Concern | Tool |
-|---------|------|
-| Chat, locale, subject, autoNarrate | Zustand (persist to localStorage) |
-| Auth token + user profile | Zustand (separate store, persist) |
-| Health polling, feedback, subjects | TanStack Query |
+### LLM backend selection (`backend/app/llm.py`)
+Detects backend at import time: `GROQ_API_KEY` → Groq Llama 3.3 70B; else `ANTHROPIC_API_KEY` → Claude Sonnet 4.6; else "none" (local formatted fallback). On HTTP 429, Groq path retries 3× with exponential backoff (2s, 4s), then falls through to `_chunk_fallback()` which streams the local response word-by-word over SSE — the frontend renders both paths identically. Claude path uses prompt caching (`cache_control={"type": "ephemeral"}`) on the ~4K-token NCDC system prompt and extended thinking for complex problems.
 
-## Security
-- CORS: configurable `ALLOWED_ORIGINS` (or `*` for dev)
-- Rate limiter: thread-safe, sliding window, 429 response, stale IP eviction
-- Session: thread-safe, 24h TTL, 5K max, deque(maxlen=20)
-- Auth: bcrypt + JWT (72h) + BYOK
-- Input guard: OWASP LLM01 + exam cheating block
-- Passage spotlight: hash-bound markers prevent indirect injection
+### Tutoring pipeline (`backend/app/service.py`)
+The orchestrator (`TutoringService`) chains: `InputGuard` → `supervisor` (subject classify) → semantic cache → `query.rewrite` → `corrective_retrieve` (retriever + abstention) → `tutor_loop.plan_response` → LLM → `OutputGuard`. A `CircuitBreaker` (`resilience.py`) wraps LLM calls — 3 failures open the circuit for 15s up to 120s. Sessions are thread-safe `dict[sid] → {turns: deque(maxlen=20), last_access}` with 24h TTL and 5K cap; only the last 5 turns flow into the LLM prompt.
 
-## Tech Stack
-- **Frontend**: Next.js 16, React 19, TypeScript 5.8, Zustand 5, TanStack Query 5, react-markdown
-- **Backend**: FastAPI, Python 3.11+, Groq API (OpenAI-compatible)
-- **Knowledge Base**: 4 NCDC PDFs (PyMuPDF) + 4 JSON syllabus files
-- **Deployment**: Docker Compose (Redis + Qdrant + FastAPI + Next.js)
+### Agentic tutor loop (`backend/app/agents/tutor_loop.py`)
+Runs *before* generation, not as a separate LLM call. `plan_response()` performs keyword-based complexity detection (simple/moderate/complex → 2/4/6 steps), flags calculation-heavy queries to inject formulas via `tools.build_tool_context()`, and splits "compare X and Y" / "difference between" queries into multi-retrieval sub-queries. The plan is injected into the prompt as a teaching outline so the LLM follows NCDC pedagogy.
+
+### Retrieval (`backend/app/retriever.py`)
+Hybrid: BAAI/bge-m3 dense (1024-dim, multilingual — handles Luganda) + BM25 sparse via Qdrant's inverted index, fused with RRF, reranked by `mixedbread-ai/mxbai-rerank-base-v2`. BM25 vocab/IDF persists to `knowledge-base/bm25_state.json`. When Qdrant is unreachable, falls back to keyword search over `knowledge-base/syllabus/*.json` (4 JSON files, 68 structured competence entries) + `extracted/all_passages.json` (4,389 PDF-extracted chunks). `corrective_rag.py` adds abstention when grounding score < `GROUNDING_THRESHOLD` (default 0.3).
+
+### STEM tools (`backend/app/tools.py`)
+18 NIST CODATA constants + 47 formulas across 4 subjects + safe calculator (AST-based, no `eval`). `build_tool_context()` output is injected into every LLM prompt AND appended to the local fallback response, so students get formulas even when the LLM is down.
+
+### Voice subsystem (`backend/app/voice_stream.py`, `voice_ws.py`)
+WebSocket endpoint `/v1/voice/chat/stream`. Pipeline: PCM16 LE 20ms frames → energy gate (fast path, <0.1ms) → Silero VAD ONNX (~1ms, 1.6MB model, confirms speech, eliminates noise false-triggers) → utterance buffer → noise gate + semantic endpointing → ASR (Sunbird; falls back to on-device Whisper-tiny via `frontend/src/workers/whisperWorker.ts` using `@xenova/transformers`) → optional MT → LLM → optional MT back → prosody detection → sentence-chunked Sunbird TTS. `VOICE_SILERO_ENABLED=false` disables neural confirmation. Frame rate limited to 100/sec, 64KB max.
+
+### Knowledge base (4,457 passages)
+- 4 NCDC 2025 syllabus PDFs (288 pages) extracted to `knowledge-base/extracted/all_passages.json` via PyMuPDF in `indexer.py`, ~160-word chunks with overlap
+- 4 structured JSON files in `knowledge-base/syllabus/` with topics, subtopics, competences (68 entries total)
+- Multilingual bridge: 120 Luganda/Swahili/Runyankole → English term mappings
+
+### SSE streaming + fallback parity
+Both LLM tokens and local-fallback word chunks flow over `data:` SSE events. After the stream completes, `_save_turn()` writes to the session deque. Faithfulness scoring (token overlap) gates LLM responses; local fallback is trusted at 0.95. Citations attach to exact NCDC syllabus pages.
+
+### Frontend chat (`frontend/src/`)
+- `app/page.tsx`: mobile-first chat (100dvh, sticky composer, safe-area padding, scroll-to-bottom floating button when >200px from bottom)
+- `components/ChatMessage.tsx`: react-markdown + remark-gfm + `normaliseMarkdown()`; Copy/Regenerate/Listen/👍👎 action buttons; expand/collapse with gradient fade for messages >1500 chars; citations rendered as `<details open>`
+- State: Zustand stores `useChatStore` (chat, locale, subject, autoNarrate — persisted to localStorage) and `useAuthStore` (token + profile — separate persist key). TanStack Query handles health polling, feedback mutations, subjects list.
+- On-device STT: `lib/onDeviceSTT.ts` + `workers/whisperWorker.ts` (Xenova/whisper-tiny, ~50MB, cached in IndexedDB), runs in Web Worker via ONNX Runtime WASM. CSP in `next.config.ts:32` allows `wasm-unsafe-eval` in production for this.
+
+### Auth + persistence
+SQLite at `data/magezi_auth.db`. Email signup → bcrypt → JWT (72h) → 50 free credits. BYOK accepts user's own Anthropic key in lieu of credit deduction. `conversations.py` persists threads; conversation TTL 7 days, session TTL 30 days (Uganda NDPA §19).
+
+### Security
+- CORS: `ALLOWED_ORIGINS` env, comma-separated. Default `*` in dev only.
+- Rate limit: thread-safe sliding window (30 req/60s default), per-IP `deque`, stale-IP eviction at 10K keys
+- `guardrails.InputGuard`: OWASP LLM01 prompt-injection patterns + exam-cheating detection
+- Spotlighted passages: retrieved content wrapped in hash-bound markers (`llm.py`) so the LLM treats injected text as DATA, not instructions
+
+### Deployment topologies
+- **Dev**: `uvicorn` on 8000 + `bun run dev` on 3334, optional `docker compose up redis qdrant` for retrieval
+- **Compose**: 4 services (redis, qdrant, api, frontend) — `frontend` builds with `NEXT_PUBLIC_API_URL` baked in
+- **Crane Cloud**: single image (`Dockerfile.cranecloud`) running supervisord → nginx:8080 fronts uvicorn:8081 + node standalone:3000. `/v1/voice/` proxied with `Upgrade: websocket`. Backend runs as `magezi` user; logs flow to stdout/stderr via `/dev/stdout` symlinks.

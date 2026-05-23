@@ -38,6 +38,7 @@ import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useTtsAvailable } from '../hooks/useSpeech';
 import { FOLLOW_UP_PROMPTS, GENERAL_STARTER_PROMPTS, getSubjectPrompts } from '../lib/subjects';
 import { speak, stopSpeaking } from '../services/voiceService';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '../store/useAuthStore';
 import {
   ChatTurn,
@@ -153,7 +154,7 @@ function buildHistoryPayload(conversation: Conversation, message: string, skipUs
 export default function Page() {
   const workspace = useChatStore((state) => state.workspace);
   const activeConversation = useChatStore(selectActiveConversation);
-  const conversations = useChatStore(selectConversationList);
+  const conversations = useChatStore(useShallow(selectConversationList));
   const speechState = useChatStore((state) => state.speechState);
   const preferredLocale = useChatStore((state) => state.preferredLocale);
   const autoNarrate = useChatStore((state) => state.autoNarrate);
@@ -219,8 +220,10 @@ export default function Page() {
     setWorkspace(authUser?.id ?? null);
   }, [authUser?.id, setWorkspace]);
 
+  const authUserId = authUser?.id ?? null;
+
   useEffect(() => {
-    if (!authToken || !authUser) {
+    if (!authToken || !authUserId) {
       clearAccountWorkspace();
       return;
     }
@@ -254,37 +257,44 @@ export default function Page() {
     return () => {
       cancelled = true;
     };
-  }, [authToken, authUser, clearAccountWorkspace, updateUser, upsertConversations]);
+    // Dep is authUserId (primitive), not authUser (object) — updateUser() in
+    // the body would otherwise create a new authUser ref every run and loop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authToken, authUserId, clearAccountWorkspace, updateUser, upsertConversations]);
+
+  const activeConversationId = activeConversation?.id ?? null;
+  const activeConversationSynced = activeConversation?.synced ?? false;
+  const activeConversationLoaded = activeConversation?.hasLoadedTurns ?? false;
 
   useEffect(() => {
     if (
       workspace !== 'account'
       || !authToken
-      || !activeConversation
-      || !activeConversation.synced
-      || activeConversation.hasLoadedTurns
+      || !activeConversationId
+      || !activeConversationSynced
+      || activeConversationLoaded
     ) {
       return;
     }
 
     let cancelled = false;
-    setConversationStatus(activeConversation.id, 'preparing', '', 'account');
+    setConversationStatus(activeConversationId, 'preparing', '', 'account');
 
-    fetchConversationDetail(authToken, activeConversation.id)
+    fetchConversationDetail(authToken, activeConversationId)
       .then((detail) => {
         if (cancelled) return;
         hydrateConversation('account', mapRemoteDetail(detail));
       })
       .catch(() => {
         if (!cancelled) {
-          setConversationStatus(activeConversation.id, 'failed', 'Could not load this conversation.', 'account');
+          setConversationStatus(activeConversationId, 'failed', 'Could not load this conversation.', 'account');
         }
       });
 
     return () => {
       cancelled = true;
     };
-  }, [activeConversation, authToken, hydrateConversation, setConversationStatus, workspace]);
+  }, [activeConversationId, activeConversationSynced, activeConversationLoaded, authToken, hydrateConversation, setConversationStatus, workspace]);
 
   useEffect(() => {
     const element = chatAreaRef.current;

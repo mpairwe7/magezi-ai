@@ -6,9 +6,12 @@ A-Level STEM Tutor for Uganda, deployed on Crane Cloud RENU cluster.
 
 | Field | Value |
 |-------|-------|
-| URL | https://magezi-ai-81c6f046.renu-01.cranecloud.io |
+| URL | https://magezi-ai-c53f499a.renu-01.cranecloud.io |
+| App ID | `fef97411-c719-4465-b0f5-01d4fe56bd5e` |
+| Project ID | `e30f272b-b7d8-4673-9605-2b76f8c6ef37` (MageziAI) |
 | Image | `landwind/magezi-ai:latest` |
-| Size | ~5.5 GB |
+| Image digest | `sha256:cbded81fe177d2b8e91ba5a30e7a6e4376c618a2de5a26e23dbb7a1e22b897ab` |
+| Size | 1.62 GB (was 5.5 GB before CPU torch wheel switch — 2026-05-13) |
 | Port | 8080 (nginx → backend:8081 + frontend:3000) |
 | Cluster | RENU (`9e81a70e-8460-4e5d-b0a8-17abcac30f68`) |
 | GitHub | https://github.com/mpairwe7/magezi-ai |
@@ -31,8 +34,20 @@ BM25 state now loads **before** Qdrant initialization, enabling keyword fallback
 ## Build & Deploy
 
 ```bash
+# Build (CPU torch wheel pinned in Dockerfile.cranecloud — image ~1.6 GB)
 docker build -t landwind/magezi-ai:latest -f Dockerfile.cranecloud .
+
+# Push
 docker push landwind/magezi-ai:latest
+
+# Trigger redeploy on Crane Cloud (Kubernetes pulls :latest on pod restart).
+# Token lives at ~/.cranecloud/token; app id is fef97411-… (see table above).
+APP=fef97411-c719-4465-b0f5-01d4fe56bd5e
+curl -X POST -H "Authorization: Bearer $(cat ~/.cranecloud/token)" \
+  https://api.cranecloud.io/apps/$APP/restart
+
+# Wait ~60 s for rolling deploy to settle, then verify
+./scripts/verify_deploy.sh https://magezi-ai-c53f499a.renu-01.cranecloud.io
 ```
 
 ## Verified Endpoints

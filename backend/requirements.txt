@@ -12,7 +12,9 @@ anthropic==0.52.0
 # Vector store
 qdrant-client==1.14.2
 
-# Embeddings + reranking
+# Embeddings + reranking — CPU-only deployment
+# For deterministic CPU install: pip install --index-url https://download.pytorch.org/whl/cpu torch
+# Then: pip install -r requirements.txt (resolver respects pre-installed torch)
 sentence-transformers==4.1.0
 torch>=2.5.0
 
@@ -26,3 +28,6 @@ bcrypt>=4.1.0
 # Utilities
 python-dotenv==1.1.0
 python-multipart==0.0.20
+
+# Voice — Silero VAD neural inference (CPU-only, ~40MB)
+onnxruntime>=1.17.0,<2

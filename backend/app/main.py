@@ -24,6 +24,16 @@ from collections import deque
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
+# CPU-only inference tuning — must run before torch/sentence-transformers import.
+# Caps thread fan-out so concurrent requests don't oversubscribe cores (default
+# torch behaviour is one thread per core, which causes contention under load).
+_cpu_threads = os.getenv("MAGEZI_CPU_THREADS") or str(max(1, min(4, (os.cpu_count() or 4))))
+os.environ.setdefault("OMP_NUM_THREADS", _cpu_threads)
+os.environ.setdefault("MKL_NUM_THREADS", _cpu_threads)
+os.environ.setdefault("OPENBLAS_NUM_THREADS", _cpu_threads)
+os.environ.setdefault("NUMEXPR_NUM_THREADS", _cpu_threads)
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+
 from fastapi import FastAPI, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse

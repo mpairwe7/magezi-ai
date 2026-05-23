@@ -34,9 +34,24 @@ export const useAuthStore = create<AuthStore>()(
       token: null,
       user: null,
       setAuth: (token, user) => set({ token, user }),
-      updateUser: (user) => set({ user }),
+      updateUser: (user) =>
+        set((s) => {
+          const prev = s.user;
+          if (
+            prev
+            && prev.id === user.id
+            && prev.email === user.email
+            && prev.name === user.name
+            && prev.credits === user.credits
+            && prev.has_api_key === user.has_api_key
+            && prev.plan === user.plan
+          ) {
+            return s;
+          }
+          return { user };
+        }),
       updateCredits: (credits) =>
-        set((s) => s.user ? { user: { ...s.user, credits } } : s),
+        set((s) => (s.user && s.user.credits !== credits ? { user: { ...s.user, credits } } : s)),
       logout: () => set({ token: null, user: null }),
     }),
     {
